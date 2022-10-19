@@ -18,6 +18,32 @@ body {
   align-items: center;
 }
 
+header {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+form > * {
+  align-self: flex-end;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+footer > * {
+  align-self: flex-end;
+}
+
 .container > * {
   flex: 1;
 }
