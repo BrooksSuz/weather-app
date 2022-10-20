@@ -18,20 +18,29 @@ body {
   align-items: center;
 }
 
+.container > * {
+  flex: 1;
+}
+
 header {
   display: flex;
   justify-content: center;
   width: 100vw;
 }
 
-form {
-  display: flex;
-  justify-content: center;
+.main-container {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100vw;
 }
 
+form {
+  display: flex;
+  justify-content: center;
+}
+
 form > * {
-  align-self: flex-end;
   margin: 5px;
 }
 
@@ -43,8 +52,4 @@ footer {
 
 footer > * {
   align-self: flex-end;
-}
-
-.container > * {
-  flex: 1;
 }

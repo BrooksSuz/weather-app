@@ -1,4 +1,6 @@
 import './style.css';
-import getWeather from './apiRequests';
+import createWeatherDiv from './functions';
 
-getWeather();
+const button = document.querySelector('button');
+
+button.addEventListener('click', createWeatherDiv);
