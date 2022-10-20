@@ -1,4 +1,4 @@
 import './style.css';
-import { getWeather } from './apiRequests';
+import getWeather from './apiRequests';
 
 getWeather();

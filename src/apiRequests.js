@@ -3,4 +3,4 @@ export default async function getWeather() {
   const weatherData = response.json();
 
   console.log(weatherData);
-}
+};
