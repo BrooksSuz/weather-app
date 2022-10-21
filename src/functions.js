@@ -1,6 +1,5 @@
 function getLocation() {
-  const location = document.querySelector('input');
-  return location.value;
+  return document.querySelector('input').value;
 }
 
 async function getWeather() {
@@ -10,13 +9,13 @@ async function getWeather() {
     const weatherData = await response.json();
 
     const weather = {
-      location: `${weatherData.name}`,
-      country: `${weatherData.sys.country}`,
-      temperature: `${weatherData.main.temp}`,
-      feels_like: `${weatherData.main.feels_like}`,
-      weather_description: `${weatherData.weather[0].description}`,
-      humidity: `${weatherData.main.humidity}`,
-      wind_speed: `${weatherData.wind.speed}`
+      Location: `${weatherData.name}`,
+      Country: `${weatherData.sys.country}`,
+      Temperature: `${Math.round((weatherData.main.temp - 273.15) * 9/5 + 32)}°F`,
+      'Feels Like': `${Math.round((weatherData.main.feels_like - 273.15) * 9/5 + 32)}°F`,
+      'Weather Description': `${weatherData.weather[0].description}`,
+      Humidity: `${weatherData.main.humidity}`,
+      'Wind Speed': `${Math.round(weatherData.wind.speed * 2.237)}mph`
     }
 
     return weather;
@@ -29,9 +28,8 @@ async function getWeather() {
 export default async function createWeatherDiv() {
   try {
     const mainContainer = document.querySelector('.main-container');
-    const promise = getWeather();
-    const weather = await promise;
-    const keysValuesParent = document.createElement('div');
+    const weather = await getWeather();
+    const weatherDiv = document.createElement('div');
     const keys = document.createElement('div');
     const values = document.createElement('div');
 
@@ -39,9 +37,9 @@ export default async function createWeatherDiv() {
       mainContainer.removeChild(document.querySelector('.key-value-parent'));
     }
 
-    keysValuesParent.classList.add('key-value-parent');
-    keysValuesParent.style.display = 'flex';
-    keysValuesParent.style.justifyContent = 'center';
+    weatherDiv.classList.add('key-value-parent');
+    weatherDiv.style.display = 'flex';
+    weatherDiv.style.justifyContent = 'center';
 
     const labels = Object.keys(weather);
     labels.forEach(key => {
@@ -68,9 +66,9 @@ export default async function createWeatherDiv() {
     values.style.flexDirection = 'column';
     values.style.alignItems = 'flex-end';
 
-    keysValuesParent.appendChild(keys);
-    keysValuesParent.appendChild(values);
-    mainContainer.appendChild(keysValuesParent);
+    weatherDiv.appendChild(keys);
+    weatherDiv.appendChild(values);
+    mainContainer.appendChild(weatherDiv);
     return null;
   } catch (err) {
     console.error(err);
