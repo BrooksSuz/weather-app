@@ -31,17 +31,46 @@ export default async function createWeatherDiv() {
     const mainContainer = document.querySelector('.main-container');
     const promise = getWeather();
     const weather = await promise;
-    const p = document.createElement('p');
-    const form = document.querySelector('form');
+    const keysValuesParent = document.createElement('div');
+    const keys = document.createElement('div');
+    const values = document.createElement('div');
 
-    if (document.querySelector('p')) {
-      mainContainer.removeChild(document.querySelector('p'));
+    if (document.querySelector('.key-value-parent')) {
+      mainContainer.removeChild(document.querySelector('.key-value-parent'));
     }
-  
-    p.style.display = 'flex';
-    p.style.justifyContent = 'center';
-    p.textContent = JSON.stringify(weather);
-    mainContainer.appendChild(p, form);
+
+    keysValuesParent.classList.add('key-value-parent');
+    keysValuesParent.style.display = 'flex';
+    keysValuesParent.style.justifyContent = 'center';
+
+    const labels = Object.keys(weather);
+    labels.forEach(key => {
+      const span = document.createElement('span');
+      span.textContent = `${key}: `;
+      keys.appendChild(span);
+    });
+
+    keys.classList.add('keys-parent');
+    keys.style.margin = '20px';
+    keys.style.display = 'flex';
+    keys.style.flexDirection = 'column';
+
+    const data = Object.values(weather);
+    data.forEach(value => {
+      const span = document.createElement('span');
+      span.textContent = value;
+      values.appendChild(span);
+    });
+
+    values.classList.add('values-parent');
+    values.style.margin = '20px';
+    values.style.display = 'flex';
+    values.style.flexDirection = 'column';
+    values.style.alignItems = 'flex-end';
+
+    keysValuesParent.appendChild(keys);
+    keysValuesParent.appendChild(values);
+    mainContainer.appendChild(keysValuesParent);
     return null;
   } catch (err) {
     console.error(err);
