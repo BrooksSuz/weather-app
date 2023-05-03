@@ -24,29 +24,30 @@ body {
 
 header {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .main-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+
+.key-value-parent {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.keys-values {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 form {
   display: flex;
   justify-content: center;
-}
-
-form > * {
-  margin: 5px;
-}
-
-footer {
-  display: flex;
-  justify-content: center;
-}
-
-footer > * {
-  align-self: flex-end;
 }
