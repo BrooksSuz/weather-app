@@ -1,3 +1,4 @@
+// Get user location
 function getLocation() {
   return document.querySelector('input').value;
 }
@@ -5,9 +6,10 @@ function getLocation() {
 async function getWeather() {
   const location = getLocation();
   try {
-    const response = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=282d06777efcb071746367bd7244932f`);
-    const weatherData = await response.json();
+    // Fetch information & convert to JSON
+    const weatherData = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=282d06777efcb071746367bd7244932f`).then(res => res.json());
 
+    // Create weather object
     const weather = {
       Location: `${weatherData.name}`,
       Country: `${weatherData.sys.country}`,
@@ -27,20 +29,26 @@ async function getWeather() {
 
 export default async function createWeatherDiv() {
   try {
+
+    // Get/Create DOM elements
     const mainContainer = document.querySelector('.main-container');
-    const weather = await getWeather();
     const weatherDiv = document.createElement('div');
     const keys = document.createElement('div');
     const values = document.createElement('div');
+
+    // Assign getWeather result to a variable
+    const weather = await getWeather();
 
     if (document.querySelector('.key-value-parent')) {
       mainContainer.removeChild(document.querySelector('.key-value-parent'));
     }
 
+    // Add weatherDiv styles
     weatherDiv.classList.add('key-value-parent');
     weatherDiv.style.display = 'flex';
     weatherDiv.style.justifyContent = 'center';
 
+    // Get weather keys & make them into DOM elements
     const labels = Object.keys(weather);
     labels.forEach(key => {
       const span = document.createElement('span');
@@ -48,11 +56,14 @@ export default async function createWeatherDiv() {
       keys.appendChild(span);
     });
 
+    // Add keys styles
     keys.classList.add('keys-parent');
     keys.style.margin = '20px';
     keys.style.display = 'flex';
     keys.style.flexDirection = 'column';
 
+
+    // Get weather values & make them into DOM elements
     const data = Object.values(weather);
     data.forEach(value => {
       const span = document.createElement('span');
@@ -60,15 +71,18 @@ export default async function createWeatherDiv() {
       values.appendChild(span);
     });
 
+    // Add values styles
     values.classList.add('values-parent');
     values.style.margin = '20px';
     values.style.display = 'flex';
     values.style.flexDirection = 'column';
     values.style.alignItems = 'flex-end';
 
+    // Append elements to their respective parent containers
     weatherDiv.appendChild(keys);
     weatherDiv.appendChild(values);
     mainContainer.appendChild(weatherDiv);
+
     return null;
   } catch (err) {
     console.error(err);
