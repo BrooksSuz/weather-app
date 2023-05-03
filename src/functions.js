@@ -5,6 +5,7 @@ function getLocation() {
 
 async function getWeather() {
   const location = getLocation();
+  
   try {
     // Fetch information & convert to JSON
     const weatherData = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=282d06777efcb071746367bd7244932f`).then(res => res.json());
@@ -15,9 +16,9 @@ async function getWeather() {
       Country: `${weatherData.sys.country}`,
       Temperature: `${Math.round((weatherData.main.temp - 273.15) * 9/5 + 32)}°F`,
       'Feels Like': `${Math.round((weatherData.main.feels_like - 273.15) * 9/5 + 32)}°F`,
-      'Weather Description': `${weatherData.weather[0].description}`,
+      'Weather Description': `${weatherData.weather[0].description}`.replace(/\b\w/g, letter => letter.toUpperCase()),
       Humidity: `${weatherData.main.humidity}`,
-      'Wind Speed': `${Math.round(weatherData.wind.speed * 2.237)}mph`
+      'Wind Speed': `${Math.round(weatherData.wind.speed * 2.237)} mph`
     }
 
     return weather;
@@ -29,7 +30,6 @@ async function getWeather() {
 
 export default async function createWeatherDiv() {
   try {
-
     // Get/Create DOM elements
     const mainContainer = document.querySelector('.main-container');
     const weatherDiv = document.createElement('div');
@@ -44,24 +44,19 @@ export default async function createWeatherDiv() {
       mainContainer.removeChild(document.querySelector('.key-value-parent'));
     }
 
-    // Add weatherDiv styles
+    // Add key-value-parent class to weatherDiv
     weatherDiv.classList.add('key-value-parent');
-    weatherDiv.style.display = 'flex';
-    weatherDiv.style.justifyContent = 'center';
 
     // Get weather keys & make them into DOM elements
     const labels = Object.keys(weather);
     labels.forEach(key => {
       const span = document.createElement('span');
-      span.textContent = `${key}: `;
+      span.textContent = key;
       keys.appendChild(span);
     });
 
-    // Add keys styles
-    keys.classList.add('keys-parent');
-    keys.style.margin = '20px';
-    keys.style.display = 'flex';
-    keys.style.flexDirection = 'column';
+    // Add keys-values class to keys
+    keys.classList.add('keys-values');
 
     // Get weather values & make them into DOM elements
     const data = Object.values(weather);
@@ -71,11 +66,8 @@ export default async function createWeatherDiv() {
       values.appendChild(span);
     });
 
-    // Add values styles
-    values.classList.add('values-parent');
-    values.style.margin = '20px';
-    values.style.display = 'flex';
-    values.style.flexDirection = 'column';
+    // Add keys-values class to values
+    values.classList.add('keys-values');
     values.style.alignItems = 'flex-end';
 
     // Append elements to their respective parent containers
@@ -86,6 +78,8 @@ export default async function createWeatherDiv() {
     return null;
   } catch (err) {
     console.error(err);
+
+    // TODO: Create modal
     return alert('Format is "City/State, Country"');
   }
 }
