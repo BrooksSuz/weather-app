@@ -39,6 +39,7 @@ export default async function createWeatherDiv() {
     // Assign getWeather result to a variable
     const weather = await getWeather();
 
+    // Remove old container if there is one
     if (document.querySelector('.key-value-parent')) {
       mainContainer.removeChild(document.querySelector('.key-value-parent'));
     }
@@ -61,7 +62,6 @@ export default async function createWeatherDiv() {
     keys.style.margin = '20px';
     keys.style.display = 'flex';
     keys.style.flexDirection = 'column';
-
 
     // Get weather values & make them into DOM elements
     const data = Object.values(weather);
@@ -86,6 +86,6 @@ export default async function createWeatherDiv() {
     return null;
   } catch (err) {
     console.error(err);
-    return null;
+    return alert('Format is "City/State, Country"');
   }
 }
