@@ -32,7 +32,11 @@ header {
 .main-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  gap: 3rem;
+}
+
+.hide-icon {
+  display: none;
 }
 
 .key-value-parent {
