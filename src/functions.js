@@ -1,3 +1,5 @@
+import changeIconShown from './icons';
+
 // Get user location
 function getLocation() {
   return document.querySelector('input').value;
@@ -20,6 +22,8 @@ async function getWeather() {
       Humidity: `${weatherData.main.humidity}`,
       'Wind Speed': `${Math.round(weatherData.wind.speed * 2.237)} mph`
     }
+
+    changeIconShown(weatherData);
 
     return weather;
   } catch (err) {
