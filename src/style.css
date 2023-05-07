@@ -53,5 +53,19 @@ header {
 
 form {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+}
+
+.fade-in-weather {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
