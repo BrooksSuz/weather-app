@@ -1,4 +1,5 @@
 import changeIconShown from './icons';
+import fadeInAnimation from './fadeInAnimation';
 
 // Get user location
 function getLocation() {
@@ -78,6 +79,9 @@ export default async function createWeatherDiv() {
     weatherDiv.appendChild(keys);
     weatherDiv.appendChild(values);
     mainContainer.appendChild(weatherDiv);
+
+    //Add fade-in-weather class
+    fadeInAnimation();
 
     return null;
   } catch (err) {
