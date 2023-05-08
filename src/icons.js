@@ -18,6 +18,12 @@ function changeIconShown(weatherData) {
     $('.show-icon').addClass('hide-icon').removeClass('show-icon');
     $('.fa-cloud-rain').addClass('show-icon').removeClass('hide-icon');
   }
+
+  if (weatherData.weather[0].main === 'Haze') {
+    $('.show-icon').addClass('hide-icon').removeClass('show-icon');
+    $('.fa-smog').addClass('show-icon').removeClass('hide-icon');
+  }
+  console.log(weatherData.weather[0].main);
 }
 
 export default changeIconShown;
