@@ -42,8 +42,6 @@ export default async function createWeatherDiv() {
     // Get/Create DOM elements
     const mainContainer = document.querySelector('.main-container');
     const weatherDiv = document.createElement('div');
-    const keys = document.createElement('div');
-    const values = document.createElement('div');
 
     // Assign getWeather result to a variable
     const { weather, temperature } = await getWeather();
@@ -56,38 +54,31 @@ export default async function createWeatherDiv() {
     // Add key-value-parent class to weatherDiv
     weatherDiv.classList.add('key-value-parent');
 
-    // Get weather keys & make them into DOM elements
-    const labels = Object.keys(weather);
-    labels.forEach(key => {
-      const span = document.createElement('span');
-      span.textContent = key;
-      keys.appendChild(span);
-    });
+    for (let key in weather) {
+      const p1 = document.createElement('p');
+      const p2 = document.createElement('p');
+      const container = document.createElement('div');
 
-    // Add keys-values class to keys
-    keys.classList.add('keys-values');
+      // Add text to p elements
+      p1.textContent = key;
+      p2.textContent = weather[key];
 
-    // Get weather values & make them into DOM elements
-    const data = Object.values(weather);
-    data.forEach(value => {
-      const span = document.createElement('span');
-      span.textContent = value;
-      values.appendChild(span);
-    });
+      // Add keys-values class to container
+      container.classList.add('keys-values');
 
-    // Add keys-values class to values
-    values.classList.add('keys-values');
-    values.style.alignItems = 'flex-end';
+      // Append elements to parent elements
+      container.appendChild(p1);
+      container.appendChild(p2);
+      weatherDiv.appendChild(container);
+    }
 
-    // Append elements to their respective parent containers
-    weatherDiv.appendChild(keys);
-    weatherDiv.appendChild(values);
+    // Append weatherDiv to mainContainer
     mainContainer.appendChild(weatherDiv);
 
-    //Add fade-in-weather class
+    // Add fade-in-weather class
     fadeInAnimation();
 
-    //Change the background color
+    // Change the background color
     changeBackgroundColor(temperature);
 
     return;
