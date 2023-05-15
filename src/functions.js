@@ -1,5 +1,6 @@
 import changeIconShown from './icons';
 import fadeInAnimation from './fadeInAnimation';
+import changeBackgroundColor from './temp-colors';
 
 // Get user location
 function getLocation() {
@@ -13,23 +14,26 @@ async function getWeather() {
     // Fetch information & convert to JSON
     const weatherData = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=282d06777efcb071746367bd7244932f`).then(res => res.json());
 
+    // Store current temperature separately
+    const temperature = Math.round((weatherData.main.temp - 273.15) * 9/5 + 32);
+
     // Create weather object
     const weather = {
       Location: `${weatherData.name}`,
       Country: `${weatherData.sys.country}`,
-      Temperature: `${Math.round((weatherData.main.temp - 273.15) * 9/5 + 32)}°F`,
+      Temperature: `${temperature}°F`,
       'Feels Like': `${Math.round((weatherData.main.feels_like - 273.15) * 9/5 + 32)}°F`,
       'Weather Description': `${weatherData.weather[0].description}`.replace(/\b\w/g, letter => letter.toUpperCase()),
       Humidity: `${weatherData.main.humidity}`,
-      'Wind Speed': `${Math.round(weatherData.wind.speed * 2.237)} mph`
-    }
+      'Wind Speed': `${Math.round(weatherData.wind.speed * 2.237)} mph`,
+    };
 
     changeIconShown(weatherData);
 
-    return weather;
+    return { weather, temperature };
   } catch (err) {
     console.error(err);
-    return null;
+    return;
   }
 };
 
@@ -42,7 +46,7 @@ export default async function createWeatherDiv() {
     const values = document.createElement('div');
 
     // Assign getWeather result to a variable
-    const weather = await getWeather();
+    const { weather, temperature } = await getWeather();
 
     // Remove old container if there is one
     if (document.querySelector('.key-value-parent')) {
@@ -83,7 +87,10 @@ export default async function createWeatherDiv() {
     //Add fade-in-weather class
     fadeInAnimation();
 
-    return null;
+    //Change the background color
+    changeBackgroundColor(temperature);
+
+    return;
   } catch (err) {
     console.error(err);
 
