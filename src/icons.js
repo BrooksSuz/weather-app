@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 function changeIconShown(weatherData) {
   $('.show-icon').addClass('hide-icon').removeClass('show-icon');
-  $('.fa-house').addClass('show-icon').removeClass('hide-icon');
+  $('.fa-splotch').addClass('show-icon').removeClass('hide-icon');
 
   if (weatherData.weather[0].main === 'Clouds') {
     $('.show-icon').addClass('hide-icon').removeClass('show-icon');
