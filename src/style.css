@@ -21,26 +21,23 @@ body {
   gap: 1rem;
 }
 
-h1 {
+.pretty-container {
   padding: 1.5rem;
-  display: flex;
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 0.3rem;
+}
+
+h1 {
+  display: flex;
 }
 
 form {
-  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 0.3rem;
 }
 
 .main-container {
-  padding: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 0.3rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -54,7 +51,6 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.5rem;
 }
 
 .keys-values {
@@ -64,7 +60,7 @@ form {
 }
 
 p {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
 .fade-in-weather {
