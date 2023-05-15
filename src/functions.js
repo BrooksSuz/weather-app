@@ -72,6 +72,9 @@ export default async function createWeatherDiv() {
       weatherDiv.appendChild(container);
     }
 
+    // Add pretty-container class to mainContainer
+    mainContainer.classList.add('pretty-container');
+
     // Append weatherDiv to mainContainer
     mainContainer.appendChild(weatherDiv);
 
