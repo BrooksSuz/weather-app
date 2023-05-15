@@ -23,7 +23,7 @@ async function getWeather() {
       Country: `${weatherData.sys.country}`,
       Temperature: `${temperature}°F`,
       'Feels Like': `${Math.round((weatherData.main.feels_like - 273.15) * 9/5 + 32)}°F`,
-      'Weather Description': `${weatherData.weather[0].description}`.replace(/\b\w/g, letter => letter.toUpperCase()),
+      'Description': `${weatherData.weather[0].description}`.replace(/\b\w/g, letter => letter.toUpperCase()),
       Humidity: `${weatherData.main.humidity}`,
       'Wind Speed': `${Math.round(weatherData.wind.speed * 2.237)} mph`,
     };
