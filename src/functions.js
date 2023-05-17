@@ -28,6 +28,7 @@ async function getWeather() {
       'Wind Speed': `${Math.round(weatherData.wind.speed * 2.237)} mph`,
     };
 
+    // Change weather icon
     changeIconShown(weatherData);
 
     return { weather, temperature };
@@ -88,7 +89,6 @@ export default async function createWeatherDiv() {
   } catch (err) {
     console.error(err);
 
-    // TODO: Create modal
     return alert('Format is "City/State, Country"');
   }
 }
