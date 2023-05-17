@@ -2,7 +2,7 @@
   "name": "weather-app",
   "version": "1.0.0",
   "repository": {
-    "url": "https://github.com/brookssuz/weather-app"
+    "url": "git+https://github.com/brookssuz/weather-app.git"
   },
   "description": "",
   "private": true,
