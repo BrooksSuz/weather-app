@@ -12,7 +12,7 @@ async function getWeather() {
   
   try {
     // Fetch information & convert to JSON
-    const weatherData = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=282d06777efcb071746367bd7244932f`).then(res => res.json());
+    const weatherData = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=282d06777efcb071746367bd7244932f`).then(res => res.json());
 
     // Store current temperature separately
     const temperature = Math.round((weatherData.main.temp - 273.15) * 9/5 + 32);
